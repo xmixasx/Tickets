@@ -24,16 +24,19 @@ public class TokenParser {
             rhino.evaluateString(scope, jsCode, "JavaScript", 1, null);
 
             // Get the functionName defined in JavaScriptCode
-            Object obj = scope.get("jjdecode", scope);
+            Object obj = scope.get("result", scope);
+                Object fObj = scope.get("jjdecode", scope);
 
-            if (obj instanceof Function) {
-                Function jsFunction = (Function) obj;
-
-                // Call the function with params
-                Object jsResult = jsFunction.call(rhino, scope, scope, params);
-                // Parse the jsResult object to a String
-                String result = Context.toString(jsResult);
-            }
+                if (!(fObj instanceof Function)) {
+                        System.out.println("f is undefined or not a function.");
+                } else {
+                        Object functionArgs[] = { html };
+                        Function f = (Function)fObj;
+                        Object token = f.call(rhino, scope, scope, functionArgs);
+                        String report =  Context.toString(token);
+                        result = report;
+                        System.out.println(report);
+                }
         } catch (JavaScriptException e) {
             e.printStackTrace();
         } finally {
@@ -41,13 +44,19 @@ public class TokenParser {
         }
         return result;
     }
+        public static void main(String[] args){
+                String token = patseTokenFromHtml(temp);
+                System.out.println(token);
 
-    private static String jsCode = "function jjdecode()\n" +
+        }
+
+        private static String temp = "$$_=~[];$$_={___:++$$_,$$$$:(![]+\"\")[$$_],__$:++$$_,$_$_:(![]+\"\")[$$_],_$_:++$$_,$_$$:({}+\"\")[$$_],$$_$:($$_[$$_]+\"\")[$$_],_$$:++$$_,$$$_:(!\"\"+\"\")[$$_],$__:++$$_,$_$:++$$_,$$__:({}+\"\")[$$_],$$_:++$$_,$$$:++$$_,$___:++$$_,$__$:++$$_};$$_.$_=($$_.$_=$$_+\"\")[$$_.$_$]+($$_._$=$$_.$_[$$_.__$])+($$_.$$=($$_.$+\"\")[$$_.__$])+((!$$_)+\"\")[$$_._$$]+($$_.__=$$_.$_[$$_.$$_])+($$_.$=(!\"\"+\"\")[$$_.__$])+($$_._=(!\"\"+\"\")[$$_._$_])+$$_.$_[$$_.$_$]+$$_.__+$$_._$+$$_.$;$$_.$$=$$_.$+(!\"\"+\"\")[$$_._$$]+$$_.__+$$_._+$$_.$+$$_.$$;$$_.$=($$_.___)[$$_.$_][$$_.$_];$$_.$($$_.$($$_.$$+\"\\\"\"+(![]+\"\")[$$_._$_]+$$_._$+$$_.$$__+$$_.$_$_+(![]+\"\")[$$_._$_]+\"\\\\\"+$$_.__$+$$_._$_+$$_._$$+$$_.__+$$_._$+\"\\\\\"+$$_.__$+$$_.$$_+$$_._$_+$$_.$_$_+\"\\\\\"+$$_.__$+$$_.$__+$$_.$$$+$$_.$$$_+\".\\\\\"+$$_.__$+$$_.$$_+$$_._$$+$$_.$$$_+$$_.__+\"\\\\\"+$$_.__$+$$_.__$+$$_.__$+$$_.__+$$_.$$$_+\"\\\\\"+$$_.__$+$$_.$_$+$$_.$_$+\"(\\\\\\\"\\\\\"+$$_.__$+$$_.$__+$$_.$$$+\"\\\\\"+$$_.__$+$$_.$$_+$$_.$$_+\"-\"+$$_.__+$$_._$+\"\\\\\"+$$_.__$+$$_.$_$+$$_._$$+$$_.$$$_+\"\\\\\"+$$_.__$+$$_.$_$+$$_.$$_+\"\\\\\\\",\\\\\"+$$_.$__+$$_.___+\"\\\\\\\"\"+$$_.$__+$$_.$$$+$$_.$_$_+$$_.$_$+$$_.$__+$$_.$$$$+$$_.$___+$$_.$$$+$$_.___+$$_.$__$+$$_._$$+$$_.__$+$$_.$$_$+$$_.$___+$$_.$_$$+$$_.$_$+$$_.$__$+$$_.$$$_+$$_.__$+$$_.$___+$$_.$$$_+$$_.__$+$$_.$$_+$$_.___+$$_._$_+$$_.$_$+$$_.$__+$$_.$$$$+$$_._$_+$$_.___+$$_.$$$_+$$_.$___+\"\\\\\\\");\"+\"\\\"\")())()";
+
+    private static String jsCode = "function jjdecode(t)\n" +
             "        {\n" +
             "            var result;\n" +
             "            \n" +
             "            //get string from src\n" +
-            "            var t = document.getElementById(\"src\").value;\n" +
             "            \n" +
             "            //clean it\n" +
             "            t.replace(/^\\s+|\\s+$/g, \"\");\n" +
