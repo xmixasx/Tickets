@@ -2,33 +2,23 @@ package com.tickets.mgolimbiiev.tickets;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.app.Notification;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.tickets.mgolimbiiev.tickets.adapters.StationAutocompliteAdapter;
+import com.tickets.mgolimbiiev.tickets.adapters.stationAutocompliteAdapter;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
@@ -45,11 +35,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         setSupportActionBar(toolbar);
 
         FromTextView = (AutoCompleteTextView) findViewById(R.id.station_from);
-        FromTextView.setAdapter(new StationAutocompliteAdapter(this, R.layout.station_list_item));
+        FromTextView.setAdapter(new stationAutocompliteAdapter(this, R.layout.station_list_item));
         FromTextView.setOnItemClickListener(this);
 
         ToTextView = (AutoCompleteTextView) findViewById(R.id.station_to);
-        ToTextView.setAdapter(new StationAutocompliteAdapter(this, R.layout.station_list_item));
+        ToTextView.setAdapter(new stationAutocompliteAdapter(this, R.layout.station_list_item));
         ToTextView.setOnItemClickListener(this);
         DateView = (TextView) findViewById(R.id.datePicker);
 
