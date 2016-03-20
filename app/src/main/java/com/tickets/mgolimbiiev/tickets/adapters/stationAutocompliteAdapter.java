@@ -18,12 +18,12 @@ import java.util.concurrent.Future;
 /**
  * Created by Миха on 20.03.2016.
  */
-public class stationAutocompliteAdapter extends ArrayAdapter<String> implements Filterable {
+public class StationAutocompliteAdapter extends ArrayAdapter<String> implements Filterable {
     private List<String> resultList;
     ExecutorService executor = Executors.newSingleThreadExecutor();
     private static Object lock = new Object();
 
-    public stationAutocompliteAdapter(Context context, int textViewResourceId) {
+    public StationAutocompliteAdapter(Context context, int textViewResourceId) {
         super(context, textViewResourceId);
     }
 

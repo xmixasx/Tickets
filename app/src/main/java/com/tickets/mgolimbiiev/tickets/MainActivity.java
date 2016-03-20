@@ -17,7 +17,7 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.tickets.mgolimbiiev.tickets.adapters.stationAutocompliteAdapter;
+import com.tickets.mgolimbiiev.tickets.adapters.StationAutocompliteAdapter;
 
 import java.util.Calendar;
 
@@ -35,11 +35,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         setSupportActionBar(toolbar);
 
         FromTextView = (AutoCompleteTextView) findViewById(R.id.station_from);
-        FromTextView.setAdapter(new stationAutocompliteAdapter(this, R.layout.station_list_item));
+        FromTextView.setAdapter(new StationAutocompliteAdapter(this, R.layout.station_list_item));
         FromTextView.setOnItemClickListener(this);
 
         ToTextView = (AutoCompleteTextView) findViewById(R.id.station_to);
-        ToTextView.setAdapter(new stationAutocompliteAdapter(this, R.layout.station_list_item));
+        ToTextView.setAdapter(new StationAutocompliteAdapter(this, R.layout.station_list_item));
         ToTextView.setOnItemClickListener(this);
         DateView = (TextView) findViewById(R.id.datePicker);
 
